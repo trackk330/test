@@ -1,0 +1,600 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    animation: gradient 6s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+    position: relative;
+    background-image: url('background.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+    background-position: center;     
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: -250px;
+    top: 0;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding-top: 20px;
+}
+
+.sidebar.active {
+    transform: translateX(250px);
+}
+
+.sidebar .icon img {
+    border: 4px solid #f8f9fa;
+    margin-bottom: 10px;
+}
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar .icon p {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.sidebar .nav-item .nav-link {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    display: block;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-item .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #007bff;
+}
+
+.hover-effect {
+    transition: all 0.3s;
+}
+
+.hover-effect:hover {
+    background-color: #007bff;
+    color: white !important;
+}
+
+.sidebar .social-links a {
+    font-size: 20px;
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.sidebar .social-links a:hover {
+    color: #0056b3;
+}
+
+.sidebar .search-bar input {
+    width: calc(100% - 20px);
+    margin: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.sidebar .theme-switcher button {
+    width: 80%;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar .theme-switcher button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.sidebar .external-links .nav-link {
+    font-size: 14px;
+}
+
+.sidebar .external-links .nav-link:hover {
+    color: #007bff;
+}
+
+.sidebar .alert {
+    font-size: 14px;
+    border: 1px solid rgba(255, 165, 0, 0.6);
+    margin-top: 15px;
+}
+
+.btn-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn-toggle:hover {
+    background-color: #0056b3;
+}
+
+.cursor {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.5) 0%, rgba(0,      150, 255, 0) 70%);
+    pointer-events: none;
+    mix-blend-mode: difference;
+    transition: transform 0.1s;
+}
+.profile-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: #c3f7ff;
+    height: auto;
+    transform: scale(1.0);
+    transform-origin: center;
+}
+
+.header {
+    position: relative;
+    
+}
+
+.banner {
+    width: 100%;
+    height: 415px;
+    object-fit: cover;
+}
+
+.profile-logo {
+    position: absolute;
+    bottom: -30px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    border: 3px solid white;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-logo img {
+    width: 100%;
+}
+
+.profile-info {
+    padding: 40px 20px 20px;
+    text-align: center;
+}
+
+.profile-info h1 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.subscribe, .free {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.subscribe {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.free {
+    background-color: #ffffff;
+    color: #1da1f2;
+    border: 1px solid #1da1f2;
+}
+
+.tabs {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabs button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #c3f7ff;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.tabs button:hover {
+    background-color: #ea2133;
+    transform: scale(1.1);
+}
+
+.tabs button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    transition: transform 0.3s;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    color: white;
+    z-index: 1;
+    position: relative;
+}
+
+.tabs button:hover::after {
+    transform: scale(2);
+}
+
+.tabs button.active {
+    background-color: #060447;
+    color: white;
+}
+
+.tab-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.tab-pane {
+    display: flex;
+    animation: fadeIn 0.5s ease-in-out; 
+}
+
+.tab-pane img {
+    width: 250px;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.tab-pane.active {
+    display: flex;
+    gap: 25px;
+}
+.post {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #0abad5;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: auto;
+    text-align: center;
+    animation: fadeInUp 5s ease;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-250px);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+}
+
+.main-container {
+    position: relative;
+    min-height: 100vh;
+    background: url('./images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+}
+
+body.dark-theme {
+    background-image: url('black.jpg');    
+}
+
+.cookie-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1050;
+    display: flex; /* Par défaut visible */
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.cookie-popup.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.cookie-popup .popup-container {
+    background: #fff;
+    padding: 40px; /* Augmente l'espace intérieur */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 600px;  /* Largeur de la pop-up (vous pouvez ajuster cette valeur) */
+    height: 275px; /* Hauteur de la pop-up (vous pouvez ajuster cette valeur) */
+    max-width: 90%; /* S'assure que la pop-up ne dépasse pas la largeur de l'écran */
+    max-height: 90%; /* S'assure que la pop-up ne dépasse pas la hauteur de l'écran */
+    overflow: auto; /* Pour permettre le défilement si le contenu dépasse la hauteur */
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Popup Container */
+.popup-container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    animation: popupAppear 0.7s ease-out;
+}
+
+/* Popup Appear Animation */
+@keyframes popupAppear {
+    0% {
+        transform: scale(0.5) rotate(15deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Title and Message Styling */
+.popup-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.popup-message {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Button Styling */
+.popup-actions .btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.popup-actions .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+#loginSignupButton {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 15px 30px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #ff3a3a, #ff7a7a);
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    z-index: 1050;
+}
+
+#loginSignupButton:hover {
+    background: linear-gradient(45deg, #ff7a7a, #ff3a3a);
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Icône de profil (au lieu du bouton) */
+/* Icône de profil (au lieu du bouton) */
+#profileIcon {
+    display: none; /* Cachée par défaut */
+    cursor: pointer;
+    z-index: 1051;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Style de l'icône de profil */
+#profileIcon i {
+    color: #007bff;
+    font-size: 70px; /* Taille de l'icône */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Animation au survol de l'icône */
+#profileIcon i:hover {
+    transform: scale(1.2); /* Agrandissement */
+    color: #0056b3; /* Changer la couleur au survol */
+}
+
+/* Menu de déconnexion */
+#profileMenu {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    top: 60px; /* Positionne le menu juste en dessous de l'icône */
+    right: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    z-index: 1052;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px); /* Démarre légèrement décalé */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* Animation d'apparition du menu */
+#profileMenu.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* Déplace le menu à sa position finale */
+}
+
+/* Style des éléments du menu */
+#profileMenu .dropdown-item {
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+    width: 100%;
+    text-align: left;
+}
+
+/* Effet au survol du menu */
+#profileMenu .dropdown-item:hover {
+    background-color: #f1f1f1;
+    color: #007bff;
+}
+
+/* Option de déconnexion */
+#logoutButton {
+    background: none;
+    border: none;
+    color: #e63946; /* Couleur rouge pour le bouton de déconnexion */
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    text-align: left;
+}
+
+/* Effet de survol pour le bouton de déconnexion */
+#logoutButton:hover {
+    color: #ff0000;
+    background-color: #f8d7da;
+    border-radius: 8px;
+}
+
+
+
+/* Style des modales */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Animation de glissement pour les modales */
+@keyframes slideIn {
+    from {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Style des champs de saisie dans la modale */
+.modal-body input {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.modal-body input:focus {
+    border-color: #ff3a3a;
+    box-shadow: 0 0 10px rgba(255, 58, 58, 0.5);
+}
+
+/* Boutons dans les modales */
+.modal-footer button {
+    border-radius: 25px;
+    padding: 12px 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.modal-footer button:hover {
+    background-color: #ff3a3a;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 58, 58, 0.2);
+}

